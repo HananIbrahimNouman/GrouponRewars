@@ -22,18 +22,18 @@ const RewardList = styled.div`
   padding: 8px;
 `;
 
-
-
 export default class Column extends React.Component {
   render() {
-    const isFirstColumn = this.props.column.id === 'C0';
+    const {id, columns}=this.props;
+    const isFirstColumn = id === 'C0';
+
     return (
       <Container>
-        <Title>{this.props.column.title}</Title>
-        <Droppable droppableId={this.props.column.id} isDropDisabled={isFirstColumn}>
+        <Title>{columns[id].title}</Title>
+        <Droppable droppableId={id} isDropDisabled={isFirstColumn}>
           {(provided) => (
           <RewardList ref={provided.innerRef} {...provided.droppableProps}>
-            {this.props.rewards.map((reward,index) => {
+            {columns[id].rewards.map((reward,index) => {
             return <Reward reward={reward} key={reward.id} index={index} isFirstColumn={isFirstColumn}/>})}
             {provided.placeholder}
           </RewardList>)}
