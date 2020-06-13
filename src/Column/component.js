@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Reward from './reward'
+import Reward from '../Reward'
 import { Droppable } from 'react-beautiful-dnd';
 
 
@@ -29,12 +29,12 @@ export default class Column extends React.Component {
 
     return (
       <Container>
-        <Title>{columns[id].title}</Title>
+        <Title>{columns && columns[id] && columns[id].title}</Title>
         <Droppable droppableId={id} isDropDisabled={isFirstColumn}>
           {(provided) => (
           <RewardList ref={provided.innerRef} {...provided.droppableProps}>
-            {columns[id].rewards.map((reward,index) => {
-            return <Reward reward={reward} key={reward.id} index={index} isFirstColumn={isFirstColumn}/>})}
+            {columns && columns[id] && columns[id].rewards.map((reward,index) => {
+            return <Reward reward={reward} key={reward.id} columnId={id} index={index} isFirstColumn={isFirstColumn}/>})}
             {provided.placeholder}
           </RewardList>)}
         </Droppable>

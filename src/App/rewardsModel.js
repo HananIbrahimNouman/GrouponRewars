@@ -25,6 +25,16 @@ const rewardsModel = {
         }
       };
     },
+    removeReward(state, {columnId, rewardIndex}){
+      const newRewards=state.columns[columnId].rewards;
+      newRewards[rewardIndex].content='';
+      return {
+        columns: {
+          ...state.columns,
+          [columnId]:{...state.columns[columnId],rewards:newRewards},
+        }
+      };
+    }
   },
 };
 
